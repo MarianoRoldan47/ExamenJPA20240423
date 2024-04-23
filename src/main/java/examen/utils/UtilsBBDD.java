@@ -1,5 +1,6 @@
 package examen.utils;
 
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -8,6 +9,12 @@ import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+
 
 public class UtilsBBDD {
 
@@ -80,7 +87,6 @@ public class UtilsBBDD {
 		try {
 			date = sdfEntrada.parse(fechaUsuario);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -96,7 +102,6 @@ public class UtilsBBDD {
 		try {
 			date = sdfEntrada.parse(fechaBaseDeDatos);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		SimpleDateFormat sdfSalida = new SimpleDateFormat("dd/MM/yyyy");
@@ -122,21 +127,18 @@ public class UtilsBBDD {
 	}
 	
 	public static boolean isFloat(String str) {
-		if (str.trim().equals("")) {
-			return false;
-		}
+		
 		try {
 			Float.parseFloat(str);
 			return true;
 		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(null, "El valor del saldo o del limite no es un numero float");
 			return false;
 		}
 	}
 	
 	public static boolean isInteger(String str) {
-		if (str.trim().equals("")) {
-			return false;
-		}
+		
 		try {
 			Integer.parseInt(str);
 			return true;
@@ -146,9 +148,7 @@ public class UtilsBBDD {
 	}
 	
 	public static boolean isDouble(String str) {
-		if (str.trim().equals("")) {
-			return false;
-		}
+		
 		try {
 			Double.parseDouble(str);
 			return true;
@@ -174,4 +174,28 @@ public class UtilsBBDD {
 	public static boolean isValorValidoConMatches(String valorAComprobar, String expresionRegular) {
 		return valorAComprobar.matches(expresionRegular);
 	}
+	
+	public static JDialog crearJDialog( JPanel panel, String titulo) {
+		JDialog dialogo = new JDialog();
+		// El usuario no puede redimensionar el diálogo
+		dialogo.setResizable(true);
+		// título del díalogo
+		dialogo.setTitle("Gestion Proveedor");
+		// Introducimos el panel creado sobre el diálogo
+		dialogo.setContentPane(panel);
+		// Empaquetar el di�logo hace que todos los componentes ocupen el espacio que deben y el lugar adecuado
+		dialogo.pack();
+		// El usuario no puede hacer clic sobre la ventana padre, si el Di�logo es modal
+		dialogo.setModal(true);
+		dialogo.setBounds(0, 0, 500, 300);
+		// Centro el di�logo en pantalla
+		dialogo.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width)/2 - dialogo.getWidth()/2, 
+				(Toolkit.getDefaultToolkit().getScreenSize().height)/2 - dialogo.getHeight()/2);
+		
+		// Muestro el di�logo en pantalla
+		dialogo.setVisible(true);
+		
+		return dialogo;
+}
+	
 }

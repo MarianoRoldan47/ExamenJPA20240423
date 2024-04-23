@@ -30,7 +30,7 @@ public class SuperControlador {
 	 */
 	public EntityManager getEntityManager() {
 		if (em == null) {
-			em = Persistence.createEntityManagerFactory("Papeleria").createEntityManager();
+			em = Persistence.createEntityManagerFactory("bankonter").createEntityManager();
 		}
 		return em;
 
