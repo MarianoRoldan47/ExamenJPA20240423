@@ -12,8 +12,8 @@ import examen.models.Entidad;
 
 public class SuperControlador {
 	private EntityManager em = null;
-	private String nombreTabla = "";
-	private Class tipoEntidad;
+	protected String nombreTabla = "";
+	protected Class tipoEntidad;
 	
 	
 	

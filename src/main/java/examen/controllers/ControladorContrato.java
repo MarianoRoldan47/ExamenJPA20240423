@@ -20,4 +20,6 @@ public class ControladorContrato extends SuperControlador {
 		public Contrato find(Integer id) {
 			return(Contrato) getEntityManager().find(Contrato.class, id);
 		}
+		
+		
 }

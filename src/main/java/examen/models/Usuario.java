@@ -65,7 +65,7 @@ public class Usuario extends Entidad {
 	
 	@Override
 	public String toString() {
-		return nombreUsuario;
+		return id + " - " + nombreUsuario;
 	}
 	
 	

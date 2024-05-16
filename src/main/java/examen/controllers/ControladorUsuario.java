@@ -17,6 +17,8 @@ public class ControladorUsuario  extends SuperControlador {
 	}
 	
 	public Usuario find(Integer id) {
+		
 		return(Usuario) getEntityManager().find(Usuario.class, id);
 	}
+	
 }

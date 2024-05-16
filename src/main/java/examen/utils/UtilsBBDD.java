@@ -187,7 +187,7 @@ public class UtilsBBDD {
 		dialogo.pack();
 		// El usuario no puede hacer clic sobre la ventana padre, si el Di�logo es modal
 		dialogo.setModal(true);
-		dialogo.setBounds(0, 0, 500, 300);
+		dialogo.setBounds(0, 0, 500, 500);
 		// Centro el di�logo en pantalla
 		dialogo.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width)/2 - dialogo.getWidth()/2, 
 				(Toolkit.getDefaultToolkit().getScreenSize().height)/2 - dialogo.getHeight()/2);
