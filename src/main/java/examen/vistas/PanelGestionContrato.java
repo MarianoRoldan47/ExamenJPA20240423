@@ -26,7 +26,6 @@ import javax.swing.JToolBar;
 
 import examen.controllers.ControladorContrato;
 import examen.controllers.ControladorTipoContrato;
-import examen.controllers.ControladorUsuario;
 import examen.models.Contrato;
 import examen.utils.UtilsBBDD;
 
@@ -383,12 +382,6 @@ public class PanelGestionContrato extends JPanel {
 			jtfFechaFirma.setText(strFecha);
 
 			jtfTipoContrato.setText(ControladorTipoContrato.getInstance().find(c.getIdTipoContrato().getId()).toString());
-			
-			int idUsuario = c.getIdUsuario().getId();
-			
-			c.setIdUsuario(ControladorUsuario.getInstance().find(idUsuario));
-			
-			jtfUsuario.setText("");
 			
 			jtfUsuario.setText(c.getIdUsuario().toString());
 			

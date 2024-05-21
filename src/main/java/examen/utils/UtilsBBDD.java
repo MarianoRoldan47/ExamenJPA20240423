@@ -1,5 +1,6 @@
 package examen.utils;
 
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -69,6 +69,33 @@ public class UtilsBBDD {
 
 		rs.close();
 		s.close();
+	}
+	
+	public static String getStringFromDate (String simpleDateFormat, Date fechaDate) {
+		try {
+			return new SimpleDateFormat(simpleDateFormat).format(fechaDate);
+		}
+		catch (Exception ex) {
+			System.out.println("Unable to format date: " + fechaDate + " with format: " + simpleDateFormat);
+			return "";
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param dateFormat
+	 * @param date
+	 * @return
+	 */
+	public static Date getDateFromString (String simpleDateFormat, String fecha) {
+		try {
+			return new SimpleDateFormat(simpleDateFormat).parse(fecha);
+		}
+		catch (Exception ex) {
+			System.out.println("Unable to parse string: " + fecha + " to java.util.Date with format: " + simpleDateFormat);
+			return null;
+		}
 	}
 	
 	/**
@@ -132,7 +159,6 @@ public class UtilsBBDD {
 			Float.parseFloat(str);
 			return true;
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "El valor del saldo o del limite no es un numero float");
 			return false;
 		}
 	}
@@ -162,9 +188,8 @@ public class UtilsBBDD {
 		
 		String strFechaNacimiento = str;
 
-		Date fechaNacimiento = null;
 		try {
-			fechaNacimiento = sdf.parse(strFechaNacimiento);
+			sdf.parse(strFechaNacimiento);
 			return true;
 		} catch (Exception ex) {
 			return false;
@@ -180,22 +205,47 @@ public class UtilsBBDD {
 		// El usuario no puede redimensionar el diálogo
 		dialogo.setResizable(true);
 		// título del díalogo
-		dialogo.setTitle("Gestion Proveedor");
+		dialogo.setTitle(titulo);
 		// Introducimos el panel creado sobre el diálogo
 		dialogo.setContentPane(panel);
 		// Empaquetar el di�logo hace que todos los componentes ocupen el espacio que deben y el lugar adecuado
 		dialogo.pack();
 		// El usuario no puede hacer clic sobre la ventana padre, si el Di�logo es modal
 		dialogo.setModal(true);
-		dialogo.setBounds(0, 0, 500, 500);
 		// Centro el di�logo en pantalla
-		dialogo.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width)/2 - dialogo.getWidth()/2, 
+		dialogo.setLocation(
+				(Toolkit.getDefaultToolkit().getScreenSize().width)/2 - dialogo.getWidth()/2, 
 				(Toolkit.getDefaultToolkit().getScreenSize().height)/2 - dialogo.getHeight()/2);
-		
 		// Muestro el di�logo en pantalla
 		dialogo.setVisible(true);
 		
 		return dialogo;
 }
+	
+	/**
+	 * 
+	 */
+	public static void closeDialogFromInnerJPanel(JPanel pane) {
+		JDialog dialog = getParentDialog(pane);
+        if (dialog != null) {
+            dialog.dispose(); // Cerrar el JDialog
+        }
+	}
+	
+	
+    /**
+     * Método para encontrar el JDialog ancestro
+     * @param component
+     * @return
+     */
+    private static JDialog getParentDialog(Component component) {
+        if (component == null) {
+            return null;
+        }
+        if (component instanceof JDialog) {
+            return (JDialog) component;
+        }
+        return getParentDialog(component.getParent());
+    }
 	
 }
